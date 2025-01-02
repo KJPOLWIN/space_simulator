@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://oh7sea43f3ac"]
+
+[ext_resource type="Script" path="res://universe.gd" id="1_lu4tr"]
+[ext_resource type="PackedScene" uid="uid://bthq62dn61h2p" path="res://planet.tscn" id="1_t5yn1"]
+[ext_resource type="PackedScene" uid="uid://c87h2epsqxhpj" path="res://star.tscn" id="2_i36fb"]
+
+[sub_resource type="Sky" id="Sky_1qyd8"]
+
+[sub_resource type="Environment" id="Environment_tpvax"]
+background_mode = 2
+sky = SubResource("Sky_1qyd8")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Universe" type="Node3D"]
+script = ExtResource("1_lu4tr")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_tpvax")
+
+[node name="Planet" parent="." instance=ExtResource("1_t5yn1")]
+transform = Transform3D(0.943495, 0.048061, 0.327884, 0, 0.989427, -0.14503, -0.331387, 0.136835, 0.93352, 34.1047, 0, 0)
+
+[node name="Star" parent="." instance=ExtResource("2_i36fb")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.633664, 0.185593, -0.751016, -1.49012e-08, 0.970796, 0.239906, 0.773608, -0.15202, 0.615159, 31.9955, 0.979537, 2.07832)

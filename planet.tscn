@@ -1,0 +1,28 @@
+[gd_scene load_steps=7 format=3 uid="uid://bthq62dn61h2p"]
+
+[ext_resource type="Shader" path="res://planet.gdshader" id="1_6cswq"]
+[ext_resource type="Script" path="res://planet.gd" id="1_idxht"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_b8dtl"]
+noise_type = 3
+offset = Vector3(-0.22, 0, 0)
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_qkv0w"]
+noise = SubResource("FastNoiseLite_b8dtl")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bjp3e"]
+render_priority = 0
+shader = ExtResource("1_6cswq")
+shader_parameter/land_color = Color(0, 0.72, 0.192, 1)
+shader_parameter/water_color = Color(0.168627, 0.321569, 1, 1)
+shader_parameter/land_threshold = 0.5
+shader_parameter/noise = SubResource("NoiseTexture2D_qkv0w")
+
+[sub_resource type="SphereMesh" id="SphereMesh_i72uu"]
+material = SubResource("ShaderMaterial_bjp3e")
+
+[node name="Planet" type="Node3D"]
+script = ExtResource("1_idxht")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_i72uu")
