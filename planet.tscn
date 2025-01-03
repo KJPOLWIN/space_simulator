@@ -20,9 +20,12 @@ shader_parameter/noise = SubResource("NoiseTexture2D_qkv0w")
 
 [sub_resource type="SphereMesh" id="SphereMesh_i72uu"]
 material = SubResource("ShaderMaterial_bjp3e")
+radius = 6.371
+height = 12.742
 
 [node name="Planet" type="Node3D"]
 script = ExtResource("1_idxht")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+layers = 2
 mesh = SubResource("SphereMesh_i72uu")

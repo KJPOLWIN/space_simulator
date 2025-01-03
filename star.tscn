@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://c87h2epsqxhpj"]
+[gd_scene load_steps=7 format=3 uid="uid://c87h2epsqxhpj"]
 
+[ext_resource type="Script" path="res://star.gd" id="1_f81q8"]
 [ext_resource type="Shader" path="res://star.gdshader" id="1_uexpc"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_sw12t"]
@@ -19,14 +20,17 @@ shader_parameter/noise = SubResource("NoiseTexture2D_ow3dw")
 
 [sub_resource type="SphereMesh" id="SphereMesh_g3ad7"]
 material = SubResource("ShaderMaterial_fel2m")
-radius = 5.0
-height = 10.0
+radius = 695.7
+height = 1391.4
 
 [node name="Star" type="Node3D"]
+script = ExtResource("1_f81q8")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+layers = 2
 mesh = SubResource("SphereMesh_g3ad7")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
-light_energy = 50.0
-omni_range = 100.0
+layers = 3
+light_energy = 100000.0
+omni_range = 1.496e+07

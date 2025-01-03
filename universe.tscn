@@ -1,27 +1,58 @@
-[gd_scene load_steps=6 format=3 uid="uid://oh7sea43f3ac"]
+[gd_scene load_steps=7 format=3 uid="uid://oh7sea43f3ac"]
 
 [ext_resource type="Script" path="res://universe.gd" id="1_lu4tr"]
 [ext_resource type="PackedScene" uid="uid://bthq62dn61h2p" path="res://planet.tscn" id="1_t5yn1"]
 [ext_resource type="PackedScene" uid="uid://c87h2epsqxhpj" path="res://star.tscn" id="2_i36fb"]
+[ext_resource type="PackedScene" uid="uid://bs2si85m1wc4e" path="res://star_image.tscn" id="4_usbn8"]
 
-[sub_resource type="Sky" id="Sky_1qyd8"]
+[sub_resource type="Environment" id="Environment_2g8wi"]
+background_mode = 1
 
-[sub_resource type="Environment" id="Environment_tpvax"]
-background_mode = 2
-sky = SubResource("Sky_1qyd8")
-tonemap_mode = 2
-glow_enabled = true
+[sub_resource type="Environment" id="Environment_cjqdk"]
+background_mode = 4
 
 [node name="Universe" type="Node3D"]
 script = ExtResource("1_lu4tr")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_tpvax")
-
-[node name="Planet" parent="." instance=ExtResource("1_t5yn1")]
-transform = Transform3D(0.943495, 0.048061, 0.327884, 0, 0.989427, -0.14503, -0.331387, 0.136835, 0.93352, 34.1047, 0, 0)
-
-[node name="Star" parent="." instance=ExtResource("2_i36fb")]
-
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.633664, 0.185593, -0.751016, -1.49012e-08, 0.970796, 0.239906, 0.773608, -0.15202, 0.615159, 31.9955, 0.979537, 2.07832)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Camera3D"]
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="SubViewport" type="SubViewport" parent="Camera3D/SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4
+
+[node name="SkyCamera" type="Camera3D" parent="Camera3D/SubViewportContainer/SubViewport"]
+transform = Transform3D(-0.00265208, -0.506524, 0.862222, 0.00451481, 0.86221, 0.506531, -0.999986, 0.00523613, 2.09778e-07, 149609, 22.4661, 0.00622302)
+cull_mask = 4
+environment = SubResource("Environment_2g8wi")
+current = true
+
+[node name="FakeSunPivot" type="Node3D" parent="Camera3D/SubViewportContainer/SubViewport/SkyCamera"]
+transform = Transform3D(1, -4.65661e-10, -4.6235e-10, 0, 1, 3.0902e-08, 2.89901e-12, -2.87039e-08, 1, 0, 0, 0)
+
+[node name="FakeSun" parent="Camera3D/SubViewportContainer/SubViewport/SkyCamera/FakeSunPivot" instance=ExtResource("4_usbn8")]
+transform = Transform3D(1, 0, 1.61833e-10, 0, 1, 3.0906e-08, -2.29917e-10, -2.8699e-08, 1, 0, 0, -5)
+
+[node name="SubViewport2" type="SubViewport" parent="Camera3D/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4
+
+[node name="PlanetsCamera" type="Camera3D" parent="Camera3D/SubViewportContainer/SubViewport2"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 149614, 12.878, 0.00622302)
+cull_mask = 2
+environment = SubResource("Environment_cjqdk")
+current = true
+far = 10000.0
+
+[node name="Planet" parent="Camera3D/SubViewportContainer/SubViewport2" instance=ExtResource("1_t5yn1")]
+transform = Transform3D(0.943495, 0.048061, 0.327884, 0, 0.989427, -0.14503, -0.331387, 0.136835, 0.93352, 149600, 0, 0)
+radius = 6.371
+
+[node name="Star" parent="Camera3D/SubViewportContainer/SubViewport2" instance=ExtResource("2_i36fb")]
+radius = 695.7
