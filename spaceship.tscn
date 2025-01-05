@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://doygd8gsr2giw"]
+
+[ext_resource type="Script" path="res://spaceship.gd" id="1_0jlg1"]
+[ext_resource type="PackedScene" uid="uid://dbk4bjw4uj3vl" path="res://Spaceship_interior/spaceship_interior_2.glb" id="1_qr683"]
+
+[sub_resource type="Environment" id="Environment_wjktv"]
+background_mode = 5
+
+[node name="Spaceship" type="Node3D"]
+script = ExtResource("1_0jlg1")
+
+[node name="spaceship_interior_2" parent="." instance=ExtResource("1_qr683")]
+
+[node name="CameraPivot" type="Node3D" parent="spaceship_interior_2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.39624)
+
+[node name="SpaceshipCamera" type="Camera3D" parent="spaceship_interior_2/CameraPivot"]
+transform = Transform3D(-1, 2.6054e-15, -1.47027e-07, 2.6054e-15, 1, -5.47719e-16, 1.47027e-07, -5.4772e-16, -1, 0, 0, 0)
+cull_mask = 1047553
+environment = SubResource("Environment_wjktv")
+current = true
+near = 0.007

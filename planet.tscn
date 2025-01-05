@@ -22,6 +22,8 @@ shader_parameter/noise = SubResource("NoiseTexture2D_qkv0w")
 material = SubResource("ShaderMaterial_bjp3e")
 radius = 6.371
 height = 12.742
+radial_segments = 128
+rings = 64
 
 [node name="Planet" type="Node3D"]
 script = ExtResource("1_idxht")

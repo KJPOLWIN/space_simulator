@@ -23,8 +23,10 @@ func recalculate_size(distance : float):
 	mesh_instance_3d.mesh.bottom_radius = fake_sun_size
 	
 	if distance < 10000:
-		hide()
+		#hide()
+		pass
 	else:
 		show()
 	
+	#print(distance, " ", fake_sun_size)
 	pass

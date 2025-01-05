@@ -24,15 +24,15 @@ It is possible that displaying everything in the same manner as this disk (so ch
     - [ ] Second planet
 - [x] Correct astronomical distances
 - [ ] Spaceship
-  - [ ] Interior
-    - [ ] Model
-    - [ ] Textures
+  - [x] Interior
+    - [x] Model
+    - [x] Textures
   - [ ] Onboard instruments
     - [ ] Speedometer
     - [ ] Navball
     - [ ] Attitude meter
 - [ ] Controls
-  - [ ] Camera
+  - [x] Camera
   - [ ] Spaceship controls
   - [ ] Time controls
 - [ ] Physics
